@@ -1,26 +1,38 @@
+import { useState } from "react";
+
 interface MessageProps {
   id: string;
   text: string;
   time: string;
 }
 const Message = ({ id, text, time }: MessageProps) => {
-  const isId1 = id === "1";
+  const iuUserId = id == "1";
+  const [openTime, SetOpenTime] = useState<boolean>(false)
+
 
   return (
-    <div className={`flex mb-4 space-y-3 ${isId1 && "justify-end"}`}>
-      <div className=" ">
-        <p
-          className={`flex  border-2 py-2 px-4 rounded-t-xl shadow-lg  max-w-2/3 whitespace-pre-wrap  ${
-            isId1
-              ? "justify-end rounded-bl-xl "
-              : "rounded-br-xl bg-blue-500 text-white "
-          }`}
-        >
-          {text}
-        </p>
-        <p className={`flex text-gray-500 text-xs ${isId1 && "justify-end"}`}>
-          {time}
-        </p>
+    <div
+      className={`flex  relative  mb-6 ${iuUserId && "justify-end"}`}
+      onClick={() => SetOpenTime(!openTime)}
+    >
+      <div>
+        <div className={`flex ${iuUserId && "justify-end"}`}>
+          <p
+            className={`border-2 py-2 px-4 rounded-t-xl shadow-lg whitespace-pre-wrap
+             ${
+               iuUserId
+                 ? "rounded-bl-xl "
+                 : "rounded-br-xl bg-blue-500 text-white "
+             }`}
+          >
+            {text}
+          </p>
+        </div>
+        {openTime && (
+          <div className={`flex ${iuUserId && "justify-end"}`}>
+            <p className="text-gray-500 text-xs ">{time}</p>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -7,12 +7,18 @@ import { MdContacts } from "react-icons/md";
 import { BsThreeDots } from "react-icons/bs";
 import { AiOutlineSetting } from "react-icons/ai";
 
-;
-function Nav() {
+interface NavProps {
+  className?: string;
+  // iconColor?: string;
+}
+
+function Nav(props: NavProps) {
   return (
-    <>
+    <nav
+      className={`flex flex-col items-center bg-gray-900 py-5 text-white px-3  ${props.className}`}
+    >
       <UserIcon className="w-1/3" size={"h-10 w-10"} status="active" />
-      <div className="flex flex-col justify-evenly flex-grow py-24">
+      <div className="flex flex-col flex-grow py-24 justify-evenly">
         <MyButton theme="primary" label={<HiBellAlert size={"2em"} />} />
         <MyButton theme="primary" label={<RiMessage3Line size={"2em"} />} />
         <MyButton theme="primary" label={<TiGroup size={"2em"} />} />
@@ -20,7 +26,7 @@ function Nav() {
         <MyButton theme="primary" label={<BsThreeDots size={"2em"} />} />
       </div>
       <MyButton theme="primary" label={<AiOutlineSetting size={"2em"} />} />
-    </>
+    </nav>
   );
 }
 
