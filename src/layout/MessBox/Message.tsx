@@ -12,25 +12,38 @@ const Message = ({ id, text, time }: MessageProps) => {
 
   return (
     <div
-      className={`flex  relative  mb-6 ${iuUserId && "justify-end"}`}
-      onClick={() => SetOpenTime(!openTime)}
+      className={` fade flex w-full relative  mb-6 ${
+        iuUserId && "justify-end"
+      }`}
     >
       <div>
         <div className={`flex ${iuUserId && "justify-end"}`}>
           <p
-            className={`border-2 py-2 px-4 rounded-t-xl shadow-lg whitespace-pre-wrap
+            onClick={() => SetOpenTime(!openTime)}
+            className={`max-w-x border-2 py-2 px-4 rounded-t-2xl shadow-lg whitespace-pre-wrap  break-words
              ${
                iuUserId
-                 ? "rounded-bl-xl "
-                 : "rounded-br-xl bg-blue-500 text-white "
+                 ? "rounded-bl-2xl "
+                 : "rounded-br-2xl bg-blue-500 text-white "
              }`}
           >
             {text}
           </p>
         </div>
-        {openTime && (
-          <div className={`flex ${iuUserId && "justify-end"}`}>
+
+        {/* <CSSTransition
+          in={openTime}
+          timeout={500}
+          classNames="fade"
+          unmountOnExit
+        >
+          <div className={`flex  ${iuUserId && "justify-end  "}`}>
             <p className="text-gray-500 text-xs ">{time}</p>
+          </div>
+        </CSSTransition> */}
+        {openTime && (
+          <div className={`flex   ${iuUserId && "justify-end "}`}>
+            <p className="text-gray-500 text-xs">{time}</p>
           </div>
         )}
       </div>

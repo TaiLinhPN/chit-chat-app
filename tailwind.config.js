@@ -7,7 +7,8 @@ export default {
        '1/6': '3%',
     },
      maxWidth: {
-        '2/3': '80%',
+       '2/3': '40%',
+       'x': '700px'
       }
   },
   plugins: [],
