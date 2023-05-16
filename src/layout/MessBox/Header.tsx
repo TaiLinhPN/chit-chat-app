@@ -6,6 +6,7 @@ import { BsThreeDots } from "react-icons/bs";
 
 const Header = () => {
   return (
+   
     <div className=" h-20 flex justify-between items-center px-5 border-b border-gray-100">
       <div className="flex space-x-3">
         <UserIcon size={"h-10 w-10"} status="disable" />

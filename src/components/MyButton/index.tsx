@@ -1,15 +1,16 @@
-interface ButtonProps
-  extends React.DetailedHTMLProps<
-    React.ButtonHTMLAttributes<HTMLButtonElement>,
-    HTMLButtonElement
-  > {
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label: React.ReactNode;
   theme: "primary" | "secondary";
+  func?: () => void;
 }
 
-function MyButton(props: ButtonProps) {
-  return <button>{props.label}</button>;
+function MyButton({ label, theme, func, ...rest }: ButtonProps) {
+  return <button  {...rest}  onClick={func}>{label}</button>;
 }
+
+export default MyButton;
+
 // function MyButton(props: ButtonProps) {
 //   return (
 //     <button
@@ -33,5 +34,3 @@ function MyButton(props: ButtonProps) {
 //      test="3xl text-blue-500"
 //      theme="secondary"
 //    />;
-
-export default MyButton;

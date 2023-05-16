@@ -3,10 +3,13 @@ export default {
   content: ['./src/**/*.{js,jsx,ts,tsx}'],
   theme: {
     extend: {},
-     inset: {
+    inset: {
+       '1':'1rem',
+       '0': '0px',
        '1/6': '3%',
     },
-     maxWidth: {
+    maxWidth: {
+      
        '2/3': '40%',
        'x': '700px'
       }
