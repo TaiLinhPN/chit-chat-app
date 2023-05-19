@@ -3,11 +3,13 @@ import Header from "./Header";
 
 const MessBox = () => {
   return (
-    <div className="flex flex-col h-full">
-      <Header/>
-      <BoxChat/>
-    </div>
+    <div className="flex flex-col flex-1">
+    
+        <Header />
+        <BoxChat />
+      </div>
+  
   );
-}
+};
 
-export default MessBox
+export default MessBox;
