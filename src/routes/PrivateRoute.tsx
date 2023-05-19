@@ -9,7 +9,6 @@ interface PrivateRouteProp {
 
 const PrivateRoute = (props: PrivateRouteProp) => {
   // const navigation = useNavigate();
-  console.log(props);
 
   const auth = props.isLogin;
   if (!auth) {

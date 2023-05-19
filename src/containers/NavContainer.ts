@@ -1,5 +1,5 @@
 import { connect } from "react-redux";
-import LoginPage from "../pages/LoginPage";
+import Nav from "../layout/Nav";
 import { logout } from "../redux/slice/authSlice";
 
 const mapActionToLogin = {
@@ -11,4 +11,4 @@ const mapStateToProps = () => {
   };
 };
 
-export default connect(mapStateToProps, mapActionToLogin)(LoginPage);
+export default connect(mapStateToProps, mapActionToLogin)(Nav);

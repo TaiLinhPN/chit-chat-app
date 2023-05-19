@@ -1,13 +1,14 @@
 import ResizableSidebar from "../components/ResizableSidebar/ResizableSidebar";
 import ContactList from "../layout/ContactList";
 import MessBox from "../layout/MessBox";
-import Nav from "../layout/Nav";
 import Profile from "../layout/Profile";
+
+import Nav from "../containers/NavContainer";
 
 function MainPage() {
   return (
     <div className="content">
-      <Nav />
+      <Nav  />
       <ResizableSidebar
         minSidebarWidth={270}
         maxSidebarWidth={500}

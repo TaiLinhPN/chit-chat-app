@@ -9,7 +9,7 @@ import { AiOutlineSetting } from "react-icons/ai";
 
 interface NavProps {
   className?: string;
-  // iconColor?: string;
+  logout: ()=> void
 }
 
 function Nav(props: NavProps) {
@@ -25,7 +25,7 @@ function Nav(props: NavProps) {
         <MyButton theme="primary" label={<MdContacts size={"2em"} />} />
         <MyButton theme="primary" label={<BsThreeDots size={"2em"} />} />
       </div>
-      <MyButton theme="primary" label={<AiOutlineSetting size={"2em"} />} />
+      <MyButton theme="primary" label={<AiOutlineSetting size={"2em"} />} func={props.logout} />
     </nav>
   );
 }

@@ -7,8 +7,6 @@ interface ContactCardProps {
 }
 
 const ContactCard = ({ mess }: ContactCardProps) => {
-  console.log("eqweqwe");
-
   return (
     <div className="relative  flex flex-col px-4 py-3  bg-white rounded shadow-lg space-y-2">
       <div className="flex space-x-3">
