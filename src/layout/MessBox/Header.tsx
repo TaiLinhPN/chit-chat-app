@@ -11,10 +11,10 @@ const Header = () => {
       <div className="flex space-x-3">
         <UserIcon size={"h-10 w-10"} status="disable" />
         <div>
-          <div className="font-bold text-gray-900">Steve Williams</div>
-          <div className="text-xs text-gray-500">
+          <p className="font-bold text-gray-900">Steve Williams</p>
+          <p className="text-xs text-gray-500">
             Status . details of status
-          </div>
+          </p>
         </div>
       </div>
       <div className="flex space-x-4">

@@ -17,9 +17,9 @@ const ContactCard = ({ mess }: ContactCardProps) => {
         </div>
 
         <div className="w-5/6">
-          <div className="font-bold text-gray-900">Steve Williams</div>
-          <div className="text-xs text-gray-500 truncate ">{"2.42 pm."}</div>
-          <div className=" text-gray-500  truncate pr-4">{mess}</div>
+          <p className="font-bold text-gray-900">Steve Williams</p>
+          <p className="text-xs text-gray-500 truncate ">{"2.42 pm."}</p>
+          <p className=" text-gray-500  truncate pr-4">{mess}</p>
         </div>
       </div>
 
