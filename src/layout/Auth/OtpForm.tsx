@@ -1,6 +1,6 @@
 import { Form, Input } from "antd";
 import { useState } from "react";
-import { resendOtpApi, ResendOtpData, verifyOtpApi } from "../../api/authApi";
+import { resendOtpApi, verifyOtpApi } from "../../api/authApi";
 import { messageError, messageSuccess } from "../../utils/notifi";
 interface OtpFormProps {
   email: string ;

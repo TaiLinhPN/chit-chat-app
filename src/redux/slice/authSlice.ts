@@ -32,11 +32,14 @@ export const login = (user: LoginData) => async (dispatch: Function) => {
     const response = await loginApi(user);
     if (response.status === 200) {
       const { data } = response.data
+
+      console.log(data);
+      
       
       messageSuccess("Login successful, welcome");
       dispatch(setLogin());
-      dispatch(setUser(data.use));
-      socket.emit("user-connect", data.use.userId);
+      dispatch(setUser(data.user));
+      socket.emit("user-connect", data.user._id);
     }
   } catch (error: any) {
     console.log(error);
