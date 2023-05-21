@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 // import { useNavigate } from "react-router-dom";
-import LoginPage from "../pages/LoginPage";
+import LoginPage from "../containers/LoginPageContainer";
 
 interface PrivateRouteProp {
   children: ReactNode;

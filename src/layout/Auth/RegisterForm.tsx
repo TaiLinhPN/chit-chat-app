@@ -1,32 +1,44 @@
 import { Form, Input } from "antd";
 import { useState } from "react";
-const RegisterForm = () => {
+import { registerApi } from "../../api/authApi";
+import { messageError, messageSuccess } from "../../utils/notifi";
 
-      const [user, setUser] = useState<any>({
-        username: "",
-        password: "",
-        email: "",
-        phone: "",
-        userType: "photographer",
-      });
+interface RegisterFormProps {
+  setShowOtpInput: (x: boolean) => void;
+  setEmail: (email: string) => void;
+}
+const RegisterForm = ({ setShowOtpInput, setEmail }: RegisterFormProps) => {
+  const [user, setUser] = useState<any>({
+    username: "",
+    password: "",
+    email: "",
+  });
 
-      const handleInputChange = (
-        event:
-          | React.ChangeEvent<HTMLInputElement>
-          | React.ChangeEvent<HTMLSelectElement>
-      ) => {
-        const { name, value } = event.target;
-        setUser({ ...user, [name]: value });
-      };
-      const onFinish = async () => {
-        try {
-        } catch (error) {
-          // messageError(error);
-        }
-      };
-      const onFinishFailed = (errorInfo: any) => {
-        console.log("Failed:", errorInfo);
-      };
+  const handleInputChange = (
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    const { name, value } = event.target;
+    setUser({ ...user, [name]: value });
+  };
+  const onFinish = async () => {
+    try {
+      const response = await registerApi(user);
+      if (response.status === 200) {
+        setShowOtpInput(true);
+        setEmail(user.email);
+        console.log(response.data.message);
+
+        messageSuccess(response.data.message);
+      }
+    } catch (error) {
+      messageError(error);
+    }
+  };
+  const onFinishFailed = (errorInfo: any) => {
+    console.log("Failed:", errorInfo);
+  };
 
   return (
     <Form
@@ -76,25 +88,6 @@ const RegisterForm = () => {
 
       <div>
         <Form.Item
-          name="phone"
-          rules={[
-            {
-              required: true,
-              message: "Please enter your phone number",
-            },
-          ]}
-        >
-          <Input
-            name="phone"
-            placeholder="Phone number?"
-            value={user.phone}
-            onChange={handleInputChange}
-          />
-        </Form.Item>
-      </div>
-
-      <div>
-        <Form.Item
           name="password"
           rules={[
             {
@@ -115,6 +108,6 @@ const RegisterForm = () => {
       <button className={"button-login"}>Register</button>
     </Form>
   );
-}
+};
 
-export default RegisterForm
+export default RegisterForm;

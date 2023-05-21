@@ -1,15 +1,50 @@
 import { Form, Input } from "antd";
 import { useState } from "react";
+import { resendOtpApi, ResendOtpData, verifyOtpApi } from "../../api/authApi";
+import { messageError, messageSuccess } from "../../utils/notifi";
 interface OtpFormProps {
-  setShowOtpInput: (x: boolean)=>  void
+  email: string ;
+  setShowOtpInput: (x: boolean) => void;
+  setIsSignUp: (x: boolean) => void;
 }
-const OtpFrom = ({ setShowOtpInput }: OtpFormProps) => {
+const OtpFrom = ({ setShowOtpInput, setIsSignUp, email }: OtpFormProps) => {
   const [otp, setOtp] = useState("");
 
   const handleOTPInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setOtp(value);
   };
+
+  const handleOtpVerification = async () => {
+    try {
+      const response = await verifyOtpApi({ email, otp });
+      if (response.status === 200) {
+        messageSuccess("Verify OTP successful");
+        setOtp("");
+        setIsSignUp(false);
+        setShowOtpInput(false);
+      }
+    } catch (error) {
+      console.log(error);
+      messageError(error);
+    }
+    // console.log("sfsdf");
+    // verifyOtpRegister({ email: user.email, otp }, navigate);
+  };
+
+  const handleResendOtp = async () => {
+     console.log('work?');
+     
+     try {
+       const response = await resendOtpApi({email});
+       if (response.status === 200) {
+         messageSuccess(response.data.message);
+       }
+     } catch (error) {
+       console.log(error);
+       messageError(error);
+     }
+   };
 
   return (
     <>
@@ -20,21 +55,25 @@ const OtpFrom = ({ setShowOtpInput }: OtpFormProps) => {
           setOtp("");
         }}
       >
-        <i className="icon-back-login fa-sharp fa-solid fa-caret-left"></i> Quay
-        lại
+        <i className="icon-back-login fa-sharp fa-solid fa-caret-left"></i> Go
+        back
       </div>
 
-      <Form className="form-login" name="basic">
+      <Form
+        className="form-login"
+        name="basic"
+        onFinish={handleOtpVerification}
+      >
         <div>
           <div>
-            <p className="head">Nhập mã OTP</p>
+            <p className="head">OTP Code</p>
             <Form.Item
               name="OTP"
               rules={[
                 {
                   required: true,
                   message:
-                    "Vui lòng nhập mã OTP đã gửi về tài khoản email đăng ký của bạn",
+                    "Please enter the OTP sent to your registered email account",
                 },
               ]}
             >
@@ -53,20 +92,20 @@ const OtpFrom = ({ setShowOtpInput }: OtpFormProps) => {
               className={"button-otp"}
               // onClick={handleOtpVerification}
             >
-              Xác thực
+              Confirm
             </button>
-            <div className="resent-opt-ctn">
-              <p>Bạn vẫn chưa nhận được?</p>
-              <button
-                className={"button-resent-otp"}
-                // onClick={handleResendOtp}
-              >
-                Nhận lại mã OTP
-              </button>
-            </div>
           </div>
         </div>
       </Form>
+      <div className="resent-opt-ctn">
+        <p>Haven't received the OTP yet?</p>
+        <button
+          className={"button-resent-otp"}
+          onClick={handleResendOtp}
+        >
+          Get code again
+        </button>
+      </div>
     </>
   );
 };

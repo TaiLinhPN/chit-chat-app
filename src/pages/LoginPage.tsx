@@ -1,26 +1,28 @@
-import { useState } from "react";
 import "../assets/css/authStyle.css";
-import RegisterForm from "../layout/Auth/RegisterForm";
-import OtpFrom from "../layout/Auth/OtpForm";
-import LoginForm from "../containers/LoginContainer";
+import RegisterForm from "../containers/RegisterFormContainer";
+import OtpFrom from "../containers/OtpFromContainer";
+import LoginForm from "../containers/LoginFormContainer";
 
-function LoginPage() {
-  const [showOtpInput, setShowOtpInput] = useState(false);
-  const [isSignUp, setIsSignUp] = useState(false);
-
-  function handlePanelChange() {
+interface LoginPageProps {
+  isSignUp: boolean;
+  showOtpInput: boolean;
+  setIsSignUp: (x: boolean) => void;
+}
+const LoginPage = ({ showOtpInput, isSignUp, setIsSignUp }: LoginPageProps) => {
+  const handlePanelChange = () => {
+    console.log(123123);
     setIsSignUp(!isSignUp);
-  }
+  };
 
   return (
     <div className="login-body">
-      <div className={isSignUp ? "container right-panel-active" : "container"}>
+      <div
+        className={
+          isSignUp ? "containerLogin right-panel-active" : "containerLogin"
+        }
+      >
         <div className="form-container sign-up-container">
-          {!showOtpInput ? (
-            <RegisterForm />
-          ) : (
-            <OtpFrom setShowOtpInput={setShowOtpInput} />
-          )}
+          {!showOtpInput ? <RegisterForm /> : <OtpFrom />}
         </div>
 
         <LoginForm />
@@ -67,6 +69,6 @@ function LoginPage() {
       </div>
     </div>
   );
-}
+};
 
 export default LoginPage;

@@ -1,4 +1,9 @@
 import { createSlice } from "@reduxjs/toolkit";
+import { loginApi, LoginData } from "../../api/authApi";
+import { messageError, messageSuccess } from "../../utils/notifi";
+import { socket } from "../../utils/socket";
+import { clearAllStorage } from "../../utils/storage";
+import { setUser } from "./useSlice";
 
 interface initialStateProps {
   isLogin: boolean
@@ -22,10 +27,27 @@ const authSlice = createSlice({
 
 const { setLogin, setLogOut } = authSlice.actions;
 
-export const login = () => async (dispatch: Function) => {
-  dispatch(setLogin());
+export const login = (user: LoginData) => async (dispatch: Function) => {
+  try {
+    const response = await loginApi(user);
+    if (response.status === 200) {
+      const { data } = response.data
+      
+      messageSuccess("Login successful, welcome");
+      dispatch(setLogin());
+      dispatch(setUser(data.use));
+      socket.emit("user-connect", data.use.userId);
+    }
+  } catch (error: any) {
+    console.log(error);
+    messageError(error);
+  }
 };
+
 export const logout = () => async (dispatch: Function) => {
+  clearAllStorage();
   dispatch(setLogOut());
+  window.location.reload();
 };
+
 export default authSlice

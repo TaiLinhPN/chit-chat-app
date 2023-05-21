@@ -1,8 +1,9 @@
 import { Form, Input } from "antd";
 import { useState } from "react";
+import { LoginData } from "../../api/authApi";
 
 interface LoginFormProps {
-    login: ()=> void
+  login: (data: LoginData) => void;
 }
 const LoginForm = ({ login }: LoginFormProps) => {
   const [userLogin, setUserLogin] = useState<any>({
@@ -11,7 +12,7 @@ const LoginForm = ({ login }: LoginFormProps) => {
   });
 
   const handleSubmitLogin = () => {
-    login();
+    login(userLogin);
   };
 
   const handleInputChangeLogin = (
@@ -24,7 +25,7 @@ const LoginForm = ({ login }: LoginFormProps) => {
   };
   return (
     <div className="form-container sign-in-container">
-      <Form className="form-login">
+      <Form className="form-login" onFinish={handleSubmitLogin}>
         <h1 className="head">Log in</h1>
         <div>
           <Form.Item
@@ -63,7 +64,7 @@ const LoginForm = ({ login }: LoginFormProps) => {
         <a style={{ marginBottom: "10px" }} href="#">
           Forgot password?
         </a>
-        <button className="button-login" onClick={handleSubmitLogin}>
+        <button className="button-login">
           Log in
         </button>
       </Form>

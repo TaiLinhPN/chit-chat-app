@@ -3,15 +3,19 @@ import thunk from "redux-thunk";
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 import authSlice from "./slice/authSlice";
+import stateLoginPageSlice from "./slice/stateLoginPageSlice";
+import userSlice from "./slice/useSlice";
 
 const reducer = combineReducers({
-  auth: authSlice.reducer
+  auth: authSlice.reducer,
+  user: userSlice.reducer,
+  stateLoginPage: stateLoginPageSlice.reducer,
 });
 
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["auth"]
+  whitelist: ["auth"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducer);
